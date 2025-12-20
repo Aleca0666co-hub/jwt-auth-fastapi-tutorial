@@ -2,7 +2,7 @@
 # FastAPI JWT Auth (HS256 Example)
 
 ---
-# English Version 🇬🇧
+### English Version 🇬🇧
 ---
 
 ## 1. General Description
@@ -54,11 +54,6 @@ This project demonstrates a basic but professional implementation of **JSON Web 
 ## 4.⚙️ Requirements
 - Python 3.12.11  
 - Library `python-jose`  
-
-Install dependencies:  
-```bash
-pip install python-jose
-```
 
 ---
 
@@ -158,7 +153,7 @@ print("\nDecoded payload:", decoded)
 
 ---
 
-# Versión en Español 🇪🇸
+### Versión en Español 🇪🇸
 
 ---
 
