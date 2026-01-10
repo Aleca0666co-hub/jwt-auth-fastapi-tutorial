@@ -1,8 +1,13 @@
 __pycache__/
 .vscode/
+.env
 
-
+#Personal
 details.txt
 to_jwt.md
 doc_aux.txt
 arc.txt
+about-jwt-lern
+comment.txt
+docs-about-library.md
+doc_douth.txt

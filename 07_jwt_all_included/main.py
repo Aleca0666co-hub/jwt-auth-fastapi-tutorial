@@ -99,6 +99,9 @@ def login(username: str, password: str):
         raise HTTPException(status_code=400, detail="Invalid credentials")
     
     if not bcrypt.checkpw(password.encode(), user["hashed_password"].encode()):
+        """We store only the bcrypt hash in the database,
+        never the plain password, and because the hash is saved as a string,
+        we need to call .encode() again when verifying so that bcrypt.checkpw receives bytes."""
         raise HTTPException(status_code=400, detail="Invalid credentials")
     
     access_token = create_access_token({"sub": username, "scopes": user["scopes"]})
@@ -139,15 +142,15 @@ def refresh(refresh_token: str):
         if not user:
             raise HTTPException(status_code=404, detail="User not found")
         
-        # Verificamos que el refresh token esté activo
+        # We check that the refresh token is active
         if active_refresh_tokens.get(username) != refresh_token:
             raise HTTPException(status_code=400, detail="Refresh token invalidated")
         
-        # Generamos nuevos tokens
+        # We generate new tokens
         new_access = create_access_token({"sub": username, "scopes": user["scopes"]})
         new_refresh = create_refresh_token({"sub": username})
         
-        # Rotamos el refresh token
+        # We rotate the refresh token
         active_refresh_tokens[username] = new_refresh
         
         return {"access_token": new_access, "refresh_token": new_refresh, "token_type": "bearer"}
